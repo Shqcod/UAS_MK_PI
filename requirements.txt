@@ -1,4 +1,4 @@
-beautifulsoup4==4.14.2
+gibeautifulsoup4==4.14.2
 certifi==2025.11.12
 charset-normalizer==3.4.4
 idna==3.11
