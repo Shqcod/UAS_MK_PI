@@ -6,6 +6,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['testSohneBreit-Buch', 'sans-serif'],
+      },
       colors: {
         primary: '#4CAF50',
         secondary: '#2196F3',

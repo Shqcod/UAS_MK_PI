@@ -1,2 +1,8 @@
 @import "tailwindcss";
-@custom-variant dark (&:where(.dark, .dark *));
+
+@font-face {
+  font-family: 'testSohneBreit-Buch';
+  src: url('/fonts/TestSohneBreit-Buch.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
