@@ -55,12 +55,17 @@ const SearchResultsPage: React.FC = () => {
   };
 
   const ArticleCard = ({ article, showScore = true }: { article: Article; showScore?: boolean }) => (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group">
+    <a
+      href={article.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="block bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer" // Menambahkan 'cursor-pointer' untuk UX
+    >
       <div className="md:flex">
         {article.image_url && (
           <div className="md:w-64 h-48 md:h-auto overflow-hidden bg-gray-200 dark:bg-gray-700">
-            <img 
-              src={article.image_url} 
+            <img
+              src={article.image_url}
               alt={article.title}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
               onError={(e) => {
@@ -103,19 +108,9 @@ const SearchResultsPage: React.FC = () => {
           <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed mb-3 line-clamp-2">
             {article.body}
           </p>
-
-          <a 
-            href={article.url} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-green-600 dark:text-green-400 font-semibold hover:text-green-700 dark:hover:text-green-300 transition-colors text-sm group/link"
-          >
-            <span>Baca Selengkapnya</span>
-            <ExternalLink className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
-          </a>
         </div>
       </div>
-    </div>
+    </a>
   );
 
   return (
@@ -210,7 +205,7 @@ const SearchResultsPage: React.FC = () => {
                     <Newspaper className="w-12 h-12 text-gray-300 dark:text-gray-600 mx-auto mb-3" />
                     <p className="text-gray-500 dark:text-gray-400">Tidak ada hasil</p>
                   </div>
-                )}
+                   )}
               </div>
             </div>
 
