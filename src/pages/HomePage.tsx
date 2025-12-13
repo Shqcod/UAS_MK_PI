@@ -82,15 +82,16 @@ const HomePage: React.FC = () => {
   <div className="absolute inset-0 bg-black/40"></div>
 
   <div className="relative z-10 px-8 py-20 flex justify-center items-center flex-col text-center pt-60">
-    <h1 className="text-6xl font-bold text-white mb-4 ">
+    <h1 className="text-6xl font-bold text-white mb-4">
       Gaza News Portal
     </h1>
-    <p className="text-xl text-gray-300">
+
+    <p className="text-xl text-gray-300 mb-10">
       Portal Berita dan Informasi untuk Palestina dan Gaza
     </p>
 
     {/* Search Form */}
-    <form onSubmit={handleSearch} className="mb-12 max-w-xl mt-8">
+    <form onSubmit={handleSearch} className="max-w-xl w-full">
       <div className="flex items-center gap-4 bg-white/10 rounded-2xl p-4 backdrop-blur">
         <Search className="w-6 h-6 text-gray-300" />
         <input
@@ -108,29 +109,31 @@ const HomePage: React.FC = () => {
         </button>
       </div>
     </form>
-        </div>
 
-
-    {/* Quick Actions */}
-    <div className="grid md:grid-cols-3 gap-6">
+    {/* Tombol Semua Berita */}
+    <div className="mt-10">
       <button
         onClick={() => navigate('/articles')}
-        className="p-8 bg-white/5 rounded-xl text-white hover:bg-white/10"
+        className="
+          px-20 py-5
+          bg-white/15
+          backdrop-blur
+          text-white
+          text-xl
+          font-semibold
+          rounded-2xl
+          hover:bg-white/25
+          transition
+        "
       >
-        <h3 className="text-xl font-bold mb-2">Semua Berita</h3>
-        <p className="text-gray-300">Jelajahi berita terkini</p>
+        Semua Berita
       </button>
 
-      <div className="p-8 bg-white/5 rounded-xl text-white">
-        <h3 className="text-xl font-bold mb-2">Analisis Mendalam</h3>
-        <p className="text-gray-300">Liputan komprehensif</p>
-      </div>
-
-      <div className="p-8 bg-white/5 rounded-xl text-white">
-        <h3 className="text-xl font-bold mb-2">Bantuan Kemanusiaan</h3>
-        <p className="text-gray-300">Informasi donasi & dukungan</p>
-      </div>
+      <p className="text-gray-300 mt-3 text-sm">
+        Jelajahi berita terkini
+      </p>
     </div>
+  </div>
 </section>
 
       {/* Timeline Section */}
