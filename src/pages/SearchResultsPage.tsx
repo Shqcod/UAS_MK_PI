@@ -90,17 +90,18 @@ const SearchResultsPage: React.FC = () => {
             {article.title}
           </h3>
 
-          <div className="flex flex-wrap gap-3 text-sm text-gray-600 dark:text-gray-400 mb-3">
+          <div className="space-y-1 text-sm text-gray-600 dark:text-gray-400 mb-3">
             {article.author && (
-              <div className="flex items-center gap-1">
-                <User className="w-3 h-3" />
-                <span>{article.author}</span>
+              <div className="flex items-center gap-2">
+                <User className="w-3 h-3 flex-shrink-0" />
+                <span className="leading-snug">{article.author}</span>
               </div>
             )}
+
             {article.tanggal && (
-              <div className="flex items-center gap-1">
-                <Calendar className="w-3 h-3" />
-                <span>{article.tanggal}</span>
+              <div className="flex items-center gap-2">
+                <Calendar className="w-3 h-3 flex-shrink-0" />
+                <span className="leading-snug">{article.tanggal}</span>
               </div>
             )}
           </div>
