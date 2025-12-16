@@ -3,7 +3,6 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Search, Newspaper, Calendar, User, ExternalLink, TrendingUp, ArrowLeft, AlertCircle } from 'lucide-react';
 import { type Article, type SearchResponse, API_URL } from '../types';
-import ThemeToggle from '../components/ThemeToggle';
 
 const SearchResultsPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -59,15 +58,15 @@ const SearchResultsPage: React.FC = () => {
       href={article.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="block bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer" // Menambahkan 'cursor-pointer' untuk UX
+      className="block bg-white/5 backdrop-blur-md rounded-2xl shadow-xl hover:shadow-[#3FB9CC]/20 transition-all duration-500 overflow-hidden group cursor-pointer border border-white/10 hover:border-[#3FB9CC]/30 hover:scale-[1.02]"
     >
       <div className="md:flex">
         {article.image_url && (
-          <div className="md:w-64 h-48 md:h-auto overflow-hidden bg-gray-200 dark:bg-gray-700">
+          <div className="md:w-48 lg:w-56 h-40 md:h-auto overflow-hidden bg-gray-900">
             <img
               src={article.image_url}
               alt={article.title}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
                 if (target.parentElement) target.parentElement.style.display = 'none';
@@ -78,82 +77,87 @@ const SearchResultsPage: React.FC = () => {
 
         <div className="flex-1 p-5">
           {showScore && (
-            <div className="mb-2">
-              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-300">
-                <TrendingUp className="w-3 h-3 mr-1" />
+            <div className="mb-3">
+              <span className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold bg-[#3FB9CC]/20 text-[#3FB9CC] border border-[#3FB9CC]/30">
+                <TrendingUp className="w-3.5 h-3.5 mr-1.5" />
                 Score: {article.score.toFixed(4)}
               </span>
             </div>
           )}
 
-          <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors line-clamp-2">
+          <h3 className="text-lg md:text-xl font-bold text-white mb-3 group-hover:text-[#3FB9CC] transition-colors line-clamp-2 leading-tight">
             {article.title}
           </h3>
 
-          <div className="space-y-1 text-sm text-gray-600 dark:text-gray-400 mb-3">
+          <div className="flex flex-wrap gap-2 mb-3">
             {article.author && (
-              <div className="flex items-center gap-2">
-                <User className="w-3 h-3 flex-shrink-0" />
-                <span className="leading-snug">{article.author}</span>
+              <div className="flex items-center gap-1.5 bg-white/5 px-2.5 py-1 rounded-lg text-xs border border-white/10">
+                <User className="w-3.5 h-3.5 text-[#3FB9CC]" />
+                <span className="text-gray-300">{article.author}</span>
               </div>
             )}
 
             {article.tanggal && (
-              <div className="flex items-center gap-2">
-                <Calendar className="w-3 h-3 flex-shrink-0" />
-                <span className="leading-snug">{article.tanggal}</span>
+              <div className="flex items-center gap-1.5 bg-white/5 px-2.5 py-1 rounded-lg text-xs border border-white/10">
+                <Calendar className="w-3.5 h-3.5 text-[#3FB9CC]" />
+                <span className="text-gray-300">{article.tanggal}</span>
               </div>
             )}
           </div>
 
-          <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed mb-3 line-clamp-2">
+          <p className="text-gray-400 text-sm leading-relaxed mb-3 line-clamp-2">
             {article.body}
           </p>
+
+          <div className="flex items-center gap-2 text-[#3FB9CC] text-sm font-semibold group-hover:gap-3 transition-all duration-300">
+            <span>Baca Artikel</span>
+            <ExternalLink className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+          </div>
         </div>
       </div>
     </a>
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <div 
+      className="min-h-screen bg-black transition-colors duration-300"
+      style={{ fontFamily: 'testSohneBreit-Buch, sans-serif' }}
+    >
       {/* Header with Search */}
-      <div className="bg-white dark:bg-gray-800 shadow-sm border-b dark:border-gray-700 sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div className="sticky top-0 z-50 backdrop-blur-xl bg-black/80 border-b border-[#248898]/20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 md:py-6">
           <div className="flex items-center gap-4 mb-4">
             <button
               onClick={() => navigate('/')}
-              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
+              className="p-3 hover:bg-white/10 rounded-xl transition-all duration-300 group border border-white/10 hover:border-[#3FB9CC]/50"
             >
-              <ArrowLeft className="w-6 h-6 text-gray-700 dark:text-gray-300" />
+              <ArrowLeft className="w-6 h-6 text-white group-hover:text-[#3FB9CC] transition-colors" />
             </button>
             
             <div className="flex-1">
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-                Hasil pencarian: "{query}"
+              <h1 className="text-2xl md:text-3xl font-bold text-white tracking-tight">
+                Hasil pencarian: <span className="text-[#3FB9CC]">"{query}"</span>
               </h1>
-              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                Membandingkan 2 model IR: BM25 vs TF-IDF
+              <p className="text-sm md:text-base text-gray-400 mt-1">
+                Membandingkan 2 model IR: <span className="text-[#3FB9CC] font-semibold">BM25</span> vs <span className="text-[#248898] font-semibold">TF-IDF</span>
               </p>
             </div>
-
-            {/* Theme Toggle */}
-            <ThemeToggle />
           </div>
 
           {/* Search Bar */}
           <form onSubmit={handleSearch} className="relative">
-            <div className="flex items-center gap-2 bg-gray-50 dark:bg-gray-700 rounded-lg border-2 border-gray-200 dark:border-gray-600 focus-within:border-green-500 dark:focus-within:border-green-400 transition-colors">
-              <Search className="w-5 h-5 text-gray-400 dark:text-gray-500 ml-4" />
+            <div className="flex items-center gap-2 bg-white/10 rounded-2xl border-2 border-white/20 focus-within:border-[#3FB9CC] transition-all duration-300 backdrop-blur-lg">
+              <Search className="w-5 h-5 text-gray-400 ml-4" />
               <input
                 type="text"
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
                 placeholder="Cari berita lainnya..."
-                className="flex-1 px-4 py-3 bg-transparent outline-none text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+                className="flex-1 px-4 py-3 md:py-4 bg-transparent outline-none text-white placeholder-gray-400 text-base md:text-lg"
               />
               <button
                 type="submit"
-                className="px-6 py-3 bg-green-500 dark:bg-green-600 text-white font-semibold rounded-r-lg hover:bg-green-600 dark:hover:bg-green-700 transition-colors"
+                className="px-6 md:px-8 py-3 md:py-4 bg-[#248898] text-white font-semibold rounded-r-2xl hover:bg-[#3FB9CC] transition-all duration-300 hover:scale-105 active:scale-95"
               >
                 Cari
               </button>
@@ -162,22 +166,22 @@ const SearchResultsPage: React.FC = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
         {/* Loading */}
         {loading && (
           <div className="flex flex-col items-center justify-center py-20">
-            <div className="w-16 h-16 border-4 border-green-500 dark:border-green-400 border-t-transparent rounded-full animate-spin mb-4"></div>
-            <p className="text-gray-600 dark:text-gray-400 text-lg">Mencari berita...</p>
+            <div className="w-16 h-16 border-4 border-[#3FB9CC] border-t-transparent rounded-full animate-spin mb-4"></div>
+            <p className="text-gray-400 text-lg">Mencari berita...</p>
           </div>
         )}
 
         {/* Error */}
         {error && (
-          <div className="bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 dark:border-red-400 p-4 rounded-lg flex items-start gap-3">
-            <AlertCircle className="w-5 h-5 text-red-500 dark:text-red-400 mt-0.5" />
+          <div className="bg-red-500/10 border-l-4 border-red-500 p-6 rounded-2xl flex items-start gap-3 backdrop-blur-md">
+            <AlertCircle className="w-6 h-6 text-red-400 mt-0.5 shrink-0" />
             <div>
-              <p className="font-semibold text-red-800 dark:text-red-300">Error</p>
-              <p className="text-red-700 dark:text-red-400">{error}</p>
+              <p className="font-bold text-red-400 text-lg">Error</p>
+              <p className="text-red-300 mt-1">{error}</p>
             </div>
           </div>
         )}
@@ -187,55 +191,104 @@ const SearchResultsPage: React.FC = () => {
           <div className="grid lg:grid-cols-2 gap-8">
             {/* BM25 Results */}
             <div>
-              <div className="bg-gradient-to-r from-green-500 to-green-600 dark:from-green-600 dark:to-green-700 text-white px-6 py-4 rounded-t-xl">
-                <h2 className="text-xl font-bold flex items-center gap-2">
-                  <TrendingUp className="w-6 h-6" />
-                  BM25 ({bm25Results.length} hasil)
+              <div className="bg-linear-to-r from-[#3FB9CC] to-[#248898] text-white px-6 py-5 rounded-2xl shadow-2xl mb-6">
+                <h2 className="text-2xl font-bold flex items-center gap-3">
+                  <div className="p-2 bg-white/20 rounded-lg">
+                    <TrendingUp className="w-6 h-6" />
+                  </div>
+                  <span>BM25</span>
+                  <span className="text-sm font-normal bg-white/20 px-3 py-1 rounded-full">
+                    {bm25Results.length} hasil
+                  </span>
                 </h2>
-                <p className="text-sm text-green-100 dark:text-green-200 mt-1">
-                  Best Matching algorithm
+                <p className="text-sm text-white/90 mt-2 ml-14">
+                  Best Matching 25 Algorithm
                 </p>
               </div>
-              <div className="space-y-4 mt-4">
+              <div className="space-y-4">
                 {bm25Results.length > 0 ? (
                   bm25Results.map((article, index) => (
                     <ArticleCard key={index} article={article} />
                   ))
                 ) : (
-                  <div className="text-center py-10 bg-white dark:bg-gray-800 rounded-xl">
-                    <Newspaper className="w-12 h-12 text-gray-300 dark:text-gray-600 mx-auto mb-3" />
-                    <p className="text-gray-500 dark:text-gray-400">Tidak ada hasil</p>
+                  <div className="text-center py-16 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10">
+                    <Newspaper className="w-16 h-16 text-gray-600 mx-auto mb-4" />
+                    <p className="text-gray-400 text-lg font-medium">Tidak ada hasil ditemukan</p>
+                    <p className="text-gray-500 text-sm mt-2">Coba kata kunci lain</p>
                   </div>
-                   )}
+                )}
               </div>
             </div>
 
             {/* TF-IDF Results */}
             <div>
-              <div className="bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-700 text-white px-6 py-4 rounded-t-xl">
-                <h2 className="text-xl font-bold flex items-center gap-2">
-                  <Search className="w-6 h-6" />
-                  TF-IDF ({tfidfResults.length} hasil)
+              <div className="bg-linear-to-r from-[#248898] to-[#1a6a77] text-white px-6 py-5 rounded-2xl shadow-2xl mb-6">
+                <h2 className="text-2xl font-bold flex items-center gap-3">
+                  <div className="p-2 bg-white/20 rounded-lg">
+                    <Search className="w-6 h-6" />
+                  </div>
+                  <span>TF-IDF</span>
+                  <span className="text-sm font-normal bg-white/20 px-3 py-1 rounded-full">
+                    {tfidfResults.length} hasil
+                  </span>
                 </h2>
-                <p className="text-sm text-blue-100 dark:text-blue-200 mt-1">
+                <p className="text-sm text-white/90 mt-2 ml-14">
                   Term Frequency-Inverse Document Frequency
                 </p>
               </div>
-              <div className="space-y-4 mt-4">
+              <div className="space-y-4">
                 {tfidfResults.length > 0 ? (
                   tfidfResults.map((article, index) => (
                     <ArticleCard key={index} article={article} />
                   ))
                 ) : (
-                  <div className="text-center py-10 bg-white dark:bg-gray-800 rounded-xl">
-                    <Newspaper className="w-12 h-12 text-gray-300 dark:text-gray-600 mx-auto mb-3" />
-                    <p className="text-gray-500 dark:text-gray-400">Tidak ada hasil</p>
+                  <div className="text-center py-16 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10">
+                    <Newspaper className="w-16 h-16 text-gray-600 mx-auto mb-4" />
+                    <p className="text-gray-400 text-lg font-medium">Tidak ada hasil ditemukan</p>
+                    <p className="text-gray-500 text-sm mt-2">Coba kata kunci lain</p>
                   </div>
                 )}
               </div>
             </div>
           </div>
         )}
+
+        {/* Comparison Info */}
+        {!loading && !error && (bm25Results.length > 0 || tfidfResults.length > 0) && (
+          <div className="mt-12 p-6 md:p-8 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10">
+            <h3 className="text-xl md:text-2xl font-bold text-white mb-4 flex items-center gap-2">
+              <span className="text-[#3FB9CC]">ℹ️</span> Tentang Algoritma Pencarian
+            </h3>
+            <div className="grid md:grid-cols-2 gap-6 text-gray-300">
+              <div>
+                <h4 className="font-bold text-[#3FB9CC] mb-2 text-lg">BM25 (Best Matching 25)</h4>
+                <p className="text-sm leading-relaxed">
+                  Algoritma ranking probabilistik yang mempertimbangkan frekuensi term dan panjang dokumen. 
+                  Lebih baik untuk query panjang dan dokumen dengan variasi panjang.
+                </p>
+              </div>
+              <div>
+                <h4 className="font-bold text-[#248898] mb-2 text-lg">TF-IDF</h4>
+                <p className="text-sm leading-relaxed">
+                  Mengukur kepentingan term berdasarkan frekuensi di dokumen (TF) dan keunikan di seluruh korpus (IDF). 
+                  Efektif untuk menemukan dokumen dengan term yang unik.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Footer */}
+      <div className="border-t border-white/10 py-12 mt-16 bg-black/50 backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <p className="text-gray-300 text-lg tracking-wide font-semibold mb-2">
+            Gaza News Portal
+          </p>
+          <p className="text-[#3FB9CC] text-xl font-bold tracking-wider">
+            🇵🇸 Stand with Palestine - Free Palestine 🇵🇸
+          </p>
+        </div>
       </div>
     </div>
   );
